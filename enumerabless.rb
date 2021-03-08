@@ -1,4 +1,4 @@
-a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,]
+a = [2, 4, 6, 8, 10]
 
 
 module Enumerable
@@ -32,10 +32,24 @@ module Enumerable
   end
   temp_arr
   end 
+
+  def my_all?
+    i = 0
+    arr = to_a
+    while i < arr.length
+      return false unless yield arr[i]
+      i += 1
+    end
+    return true
+  end      
 end
 
 a.my_each{|number|}
 
 a.my_each_with_index{|number, index|}
 
-p a.my_select{|number|}
+a.my_select{|number|}
+
+a.my_all?{|number|}
+
+p a.any?{|number| number % 7 == 0}
