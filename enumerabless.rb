@@ -101,9 +101,9 @@ module Enumerable
     acumulator = param[0] if param[0].class == Integer
     unless param.empty?
       if param[0].class == Integer and param[1].class == Symbol
-        acumulator = param[0]
+        acumulator = param[0].to_i
         while i < arr.length
-          acumulator = param[0].to_proc.call(acumulator, arr[i])
+          acumulator = param[1].to_proc.call(acumulator, arr[i])
           i += 1
         end
       elsif param[0].class == Symbol
@@ -124,6 +124,9 @@ module Enumerable
   end
   
 end
+def multiply_els(arr)
+  arr.my_inject(1, :*)
+end
 
 a.my_each{|number|}
 
@@ -141,11 +144,7 @@ a.my_count{|number|}
 
 a.my_map{|number|}
 
-p a.inject(a.inject(:+), :-)
-
-p a.inject(:+)
-
-p a.inject(:-)
+p multiply_els(a)
 
 
 
