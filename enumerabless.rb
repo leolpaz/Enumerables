@@ -41,7 +41,17 @@ module Enumerable
       i += 1
     end
     return true
-  end      
+  end
+  
+  def my_any?
+    i = 0
+    arr = to_a
+    while i < arr.length
+      return true if yield arr[i]
+      i += 1
+    end
+    return false
+  end  
 end
 
 a.my_each{|number|}
@@ -52,4 +62,8 @@ a.my_select{|number|}
 
 a.my_all?{|number|}
 
-p a.any?{|number| number % 7 == 0}
+a.my_any?{|number|}
+
+p a.none?{|number| number % 7 == 0}
+
+
