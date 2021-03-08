@@ -81,6 +81,18 @@ module Enumerable
     end
     counter
   end
+
+  def my_map
+    i = 0
+    arr = to_a
+    temp_arr = []
+    return to_enum(:my_map) unless block_given?
+    while i < arr.length
+      temp_arr.push(yield arr[i])
+      i += 1
+    end
+    temp_arr
+  end
 end
 
 a.my_each{|number|}
@@ -95,7 +107,10 @@ a.my_any?{|number|}
 
 a.my_none?{|number|}
 
-p a.my_count{|number|}
+a.my_count{|number|}
+
+a.my_map{|number| p number**2}
+
 
 
 
