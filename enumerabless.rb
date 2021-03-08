@@ -1,4 +1,4 @@
-a = [2, 4, 6, 8, 10]
+a = [2, 4, 6, 8, 10, 20]
 
 
 module Enumerable
@@ -93,6 +93,36 @@ module Enumerable
     end
     temp_arr
   end
+
+  def my_inject(*param)
+    i = 0
+    arr = to_a
+    acumulator = 0 if param.empty?
+    acumulator = param[0] if param[0].class == Integer
+    unless param.empty?
+      if param[0].class == Integer and param[1].class == Symbol
+        acumulator = param[0]
+        while i < arr.length
+          acumulator = param[0].to_proc.call(acumulator, arr[i])
+          i += 1
+        end
+      elsif param[0].class == Symbol
+        acumulator = 0
+        while i < arr.length
+          acumulator = param[0].to_proc.call(acumulator, arr[i])
+          i += 1
+          p acumulator
+        end
+      end
+      return acumulator
+    end
+    while i < arr.length
+      acumulator = yield acumulator, arr[i]
+      i += 1
+    end
+    acumulator
+  end
+  
 end
 
 a.my_each{|number|}
@@ -109,7 +139,14 @@ a.my_none?{|number|}
 
 a.my_count{|number|}
 
-a.my_map{|number| p number**2}
+a.my_map{|number|}
+
+p a.inject(a.inject(:+), :-)
+
+p a.inject(:+)
+
+p a.inject(:-)
+
 
 
 
