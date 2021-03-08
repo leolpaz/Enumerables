@@ -21,8 +21,21 @@ module Enumerable
       i += 1
     end
   end
+  
+  def my_select
+  i = 0
+  arr = to_a
+  temp_arr = []
+  while i < arr.length
+    temp_arr.push(arr[i]) if yield arr[i]
+    i += 1
+  end
+  temp_arr
+  end 
 end
 
 a.my_each{|number|}
 
-a.my_each_with_index{|number, index| p index.to_s + " " + "is" + " " + number.to_s}
+a.my_each_with_index{|number, index|}
+
+p a.my_select{|number|}
