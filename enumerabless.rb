@@ -13,9 +13,16 @@ module Enumerable
   end
 
   def my_each_with_index
+    return to_enum unless block_given?
+    i = 0
+    arr = to_a
+    while i < arr.length
+      yield arr[i], i
+      i += 1
+    end
   end
 end
 
 a.my_each{|number|}
 
-a.each_with_index{|number, index| print index}
+a.my_each_with_index{|number, index| p index.to_s + " " + "is" + " " + number.to_s}
