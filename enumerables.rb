@@ -71,6 +71,7 @@ module Enumerable
 
     while i < arr.length
       return false if yield arr[i]
+
       i += 1
     end
     true
