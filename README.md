@@ -5,15 +5,25 @@
 # Enumerable Methods
 
 On this project I remade some of the enumerable methods from scratch aiming for them to work the same as the native ones, the methods that I remade were:
+
   .each
+  
   .each_with_index
+  
   .select
+  
   .all?
+  
   .any?
+  
   .none
+  
   .count
+  
   .map
+  
   .inject
+  
 
 ## Built With
 
