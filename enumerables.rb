@@ -70,10 +70,10 @@ module Enumerable
     false
   end
 
-  def my_none?(param = nil)
+  def my_none?(param = nil, &block)
     arr = to_a
     if block_given?
-      !arr.my_any?{|element| yield element}
+      !arr.my_any?(&block)
     else
       !arr.my_any?(param)
     end
