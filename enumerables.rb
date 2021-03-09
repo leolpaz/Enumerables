@@ -54,15 +54,18 @@ module Enumerable
     true
   end
 
-  def my_any?
-    i = 0
+  def my_any?(param = nil)
     arr = to_a
-    return false unless block_given?
-
-    while i < arr.length
-      return true if yield arr[i]
-
-      i += 1
+    if block_given?
+      arr.my_each { |element| return true if yield element }
+    elsif param.nil?
+      arr.my_each { |element| return true if element }
+    elsif param.is_a? Class
+      arr.my_each { |element| return true if [element.class, element.class.superclass].include?(param) }
+    elsif param.instance_of?(Regexp)
+      arr.my_each { |element| return true if element =~ param }
+    else
+      arr.my_each { |element| return true if element == param }
     end
     false
   end
@@ -151,3 +154,4 @@ end
 def multiply_els(arr)
   arr.my_inject(1, :*)
 end
+
