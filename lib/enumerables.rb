@@ -147,10 +147,3 @@ end
 def multiply_els(arr)
   arr.my_inject(1, :*)
 end
-
-puts ((3..5).my_inject { |sum, n| sum + n })
-
-longest = %w[ant bear cat].my_inject do |memo, word|
-  memo.length > word.length ? memo : word
-end
-puts longest
