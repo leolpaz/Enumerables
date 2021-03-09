@@ -46,10 +46,10 @@ module Enumerable
     else
       if param.nil?
         arr.my_each{|element| return false if element.nil? or element == false}
+      elsif param.is_a? Class
+        arr.my_each{|element| return false unless [element.class, element.class.superclass].include?(param)}
       end
-    end
-
-      
+    end 
     true
   end
 
@@ -150,7 +150,3 @@ end
 def multiply_els(arr)
   arr.my_inject(1, :*)
 end
-
-a =[2, 5, 6]
-
-p [1, true, 'hi', []].my_all?
