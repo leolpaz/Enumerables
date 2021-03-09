@@ -16,7 +16,7 @@ On this project I remade some of the enumerable methods from scratch aiming for 
   
   .any?
   
-  .none
+  .none?
   
   .count
   
