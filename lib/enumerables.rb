@@ -20,6 +20,7 @@ module Enumerable
       yield arr[i], i
       i += 1
     end
+    self
   end
 
   def my_select
@@ -143,3 +144,5 @@ end
 def multiply_els(arr)
   arr.my_inject(1, :*)
 end
+
+p Range.new(5, 50).each_with_index{ |num| num % 2 == 0 }
