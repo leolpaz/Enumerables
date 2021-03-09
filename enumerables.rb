@@ -70,17 +70,13 @@ module Enumerable
     false
   end
 
-  def my_none?
-    i = 0
+  def my_none?(param = nil)
     arr = to_a
-    return false unless block_given?
-
-    while i < arr.length
-      return false if yield arr[i]
-
-      i += 1
+    if block_given?
+      !arr.my_any?{|element| yield element}
+    else
+      !arr.my_any?(param)
     end
-    true
   end
 
   def my_count(param = nil)
@@ -154,4 +150,3 @@ end
 def multiply_els(arr)
   arr.my_inject(1, :*)
 end
-
