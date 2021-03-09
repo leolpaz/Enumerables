@@ -38,16 +38,18 @@ module Enumerable
     temp_arr
   end
 
-  def my_all?
+  def my_all?(param = nil)
     i = 0
     arr = to_a
-    return false unless block_given?
-
-    while i < arr.length
-      return false unless yield arr[i]
-
-      i += 1
+    if block_given?
+      arr.my_each{|element| return false unless yield element}
+    else
+      if param.nil?
+        arr.my_each{|element| return false if element.nil? or element == false}
+      end
     end
+
+      
     true
   end
 
@@ -148,3 +150,7 @@ end
 def multiply_els(arr)
   arr.my_inject(1, :*)
 end
+
+a =[2, 5, 6]
+
+p [1, true, 'hi', []].my_all?
