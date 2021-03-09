@@ -3,6 +3,7 @@
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
+
     i = 0
     arr = to_a
     while i < arr.length
@@ -14,6 +15,7 @@ module Enumerable
 
   def my_each_with_index
     return to_enum(:my_each_with_index) unless block_given?
+
     i = 0
     arr = to_a
     while i < arr.length
@@ -131,6 +133,7 @@ module Enumerable
       end
       return acumulator
     end
+    acumulator = 0
     while i < arr.length
       acumulator = yield acumulator, arr[i]
       i += 1
@@ -144,5 +147,3 @@ end
 def multiply_els(arr)
   arr.my_inject(1, :*)
 end
-
-p Range.new(5, 50).each_with_index{ |num| num % 2 == 0 }
