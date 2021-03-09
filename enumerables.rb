@@ -39,17 +39,16 @@ module Enumerable
   end
 
   def my_all?(param = nil)
-    i = 0
     arr = to_a
     if block_given?
-      arr.my_each{|element| return false unless yield element}
-    else
-      if param.nil?
-        arr.my_each{|element| return false if element.nil? or element == false}
-      elsif param.is_a? Class
-        arr.my_each{|element| return false unless [element.class, element.class.superclass].include?(param)}
-      end
-    end 
+      arr.my_each { |element| return false unless yield element }
+    elsif param.nil?
+      arr.my_each { |element| return false if element.nil? or element == false }
+    elsif param.is_a? Class
+      arr.my_each { |element| return false unless [element.class, element.class.superclass].include?(param) }
+    elsif param.instance_of?(Regexp)
+      arr.my_each { |element| return false unless element =~ param }
+    end
     true
   end
 
