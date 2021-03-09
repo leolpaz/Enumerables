@@ -136,7 +136,6 @@ module Enumerable
       end
       return acumulator
     end
-    p first
     while i < arr.length
       acumulator = yield acumulator, arr[i] if i.positive?
       i += 1
