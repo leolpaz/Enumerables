@@ -48,6 +48,8 @@ module Enumerable
       arr.my_each { |element| return false unless [element.class, element.class.superclass].include?(param) }
     elsif param.instance_of?(Regexp)
       arr.my_each { |element| return false unless element =~ param }
+    else
+      arr.my_each { |element| return false if element != param }
     end
     true
   end
